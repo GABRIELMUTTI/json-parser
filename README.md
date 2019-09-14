@@ -8,4 +8,5 @@ It's pretty fast.
 # TODO
 - put print functions in a separate file;
 - create functions to easily get fields from the parsed json data;
-- eliminate dependencies.
+- eliminate dependencies;
+- make it faster.
