@@ -4,6 +4,7 @@ A JSON parser written in C.
 Dinamically allocates memory only once, all data is stored in contiguous memory.
 
 It's pretty fast.
+Could be faster though.
 
 # TODO
 - put print functions in a separate file;
