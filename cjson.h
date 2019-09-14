@@ -8,7 +8,6 @@
 
 #define IS_NUMERIC(c) ((c > 0x2f && c < 0x3a) || c == 0x2d)
 #define IS_WHITESPACE(c) (c == 0x0d || c == 0x0a || c == 0x09 || c == 0x20)
-#define JSON_OBJECT_SIZE (4)
 #define UTF8_ZERO (0x30)
 
 #define GET_CHAR(state) (state->input[state->curIndex])
@@ -16,18 +15,6 @@
 	case '\t':			   \
 	case '\r':			   \
 	case ' '
-
-#define SWITCH_NUMERIC_CASES case '0': \
-	case '1':		      \
-	case '2':		      \
-	case '3':		      \
-	case '4':		      \
-	case '5':		      \
-	case '6':		      \
-	case '7':		      \
-	case '8':		      \
-	case '9':		      \
-	case '-'
 
 #define SWITCH_NUMBER_CASES case '0': \
 	case '1':		      \
@@ -39,6 +26,10 @@
 	case '7':		      \
 	case '8':		      \
 	case '9'
+
+
+#define SWITCH_NUMERIC_CASES SWITCH_NUMBER_CASES:	\
+	case '-'
 
 enum JsonType {
 	JSON_OBJECT,
@@ -113,7 +104,7 @@ double powerOf(double num, int exp);
 enum JsonParseStatus parseJson(const char *const input, struct JsonNode **node)
 {
 	size_t bufferSize = calculateBufferSize(input);
-	void *data = malloc(sizeof(size_t) * (bufferSize) * 2);
+	void *data = malloc(sizeof(size_t) * (bufferSize * 4 / 7));
 
 	void *another = data;
 
@@ -743,10 +734,3 @@ void printDouble(double num, int level)
 }
 
 #endif /* GMTEIXEIRA_JSON_H */
-
-
-
-
-
-
-
